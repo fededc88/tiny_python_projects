@@ -47,16 +47,15 @@ def main():
     if str_length == 1:
         str_out = str_arg[0]
 
-    if str_length == 2:
-        str_arg.insert(-1, 'and')
-        str_out = ' '.join(str_arg)
+    elif str_length == 2:
+        str_out = ' and '.join(str_arg)
 
     elif str_length > 2:
         str_out = ', '.join(str_arg[0:-1])
         str_out = str_out +', and '+ str_arg[-1]
 
 
-    print('You are bringing ' + str_out + '.')
+    print('You are bringing {}.'.format(str_out))
 
 # --------------------------------------------------
 if __name__ == '__main__':

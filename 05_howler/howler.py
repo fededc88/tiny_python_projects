@@ -6,11 +6,17 @@ import os
 import sys
 
 def get_args():
+    """ Get command-line arguments"""
+
     parser = argparse.ArgumentParser(
             prog='Howler.py',
             description='Howler (upper-cases input)')
 
-    parser.add_argument('text', type=str, help='Inpyt string or file')
+    parser.add_argument('text',
+            metavar='text',
+            type=str,
+            help='Inpyt string or file')
+
     parser.add_argument('-o', '--outfile',
             metavar='str', 
             dest='outfile',
@@ -21,32 +27,18 @@ def get_args():
 
 
 def main():
+    """ program entry point """
     
     args = get_args()
 
     text = args.text
     of_path = args.outfile
 
+    out_text = open(text).read().rstrip() if os.path.isfile(text) else text
 
-    if os.path.isfile(text):
-        #print('is file', text)
-        in_file = open(text)
-        out_text = in_file.read().upper()
-        in_file.close()
-    else:
-       out_text = text.upper()
+    out_file = open(of_path, 'wt') if of_path else sys.stdout
 
-    if of_path != '':
-        out_file = open(of_path, 'wt')
-    else:
-        out_file = sys.stdout
-
-    print(out_text, file = out_file)
-
-    if out_file != sys.stdout:
-        out_file.close()
-
-
+    print(out_text.upper(), file = out_file)
 
 if __name__ == '__main__':
     main()
